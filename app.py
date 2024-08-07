@@ -14,28 +14,30 @@ from nltk.stem import WordNetLemmatizer
 import re
 import emoji
 
-# Load the trained model
-def create_model():
-    model = tf.keras.Sequential([
-        Embedding(input_dim=20000, output_dim=128),
-        Bidirectional(LSTM(256, return_sequences=True, kernel_regularizer=l2(0.01))),
-        BatchNormalization(),
-        Bidirectional(LSTM(128, return_sequences=True, kernel_regularizer=l2(0.01))),
-        Bidirectional(LSTM(64, return_sequences=True)),
-        Bidirectional(LSTM(32)),
-        Dense(128, activation='relu', kernel_regularizer=l2(0.01)),
-        Dense(64, activation='relu'),
-        BatchNormalization(),
-        Dropout(0.5),
-        Dense(32, activation='relu'),
-        Dropout(0.5),
-        Dense(3, activation='softmax')
-    ])
-    model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    return model
+# # Load the trained model
+# def create_model():
+#     model = tf.keras.Sequential([
+#         Embedding(input_dim=20000, output_dim=128),
+#         Bidirectional(LSTM(256, return_sequences=True, kernel_regularizer=l2(0.01))),
+#         BatchNormalization(),
+#         Bidirectional(LSTM(128, return_sequences=True, kernel_regularizer=l2(0.01))),
+#         Bidirectional(LSTM(64, return_sequences=True)),
+#         Bidirectional(LSTM(32)),
+#         Dense(128, activation='relu', kernel_regularizer=l2(0.01)),
+#         Dense(64, activation='relu'),
+#         BatchNormalization(),
+#         Dropout(0.5),
+#         Dense(32, activation='relu'),
+#         Dropout(0.5),
+#         Dense(3, activation='softmax')
+#     ])
+#     model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+#     return model
 
-model = create_model()
-model.load_weights('sentiment_model_tune.h5')
+# model = create_model()
+# model.load_weights('sentiment_model_tune.h5')
+
+model = load_model('sentiment_model_tune.h5')
 
 # Tokenizer setup (recreate or load tokenizer used during training)
 tokenizer = Tokenizer(num_words=5000)
