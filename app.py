@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # Load your model
-model_path = 'sentiment_model_tune.h5'
+model_path = 'model_tune.h5'
 model = tf.keras.models.load_model(model_path)
 
 # Function to preprocess text
